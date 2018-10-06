@@ -9,3 +9,7 @@ This site was helpful as a tutorial:
 https://www.twilio.com/blog/2017/02/an-easy-way-to-read-and-write-to-a-google-spreadsheet-in-python.html
 
 Once I had this set up, it naturally followed that I could generate the folders, move the files and fill in placeholder text from a written letter. Beyond the company name, position name and the date, each cover letter would need to be manually edited further and that is of course well outside of my reach right now. Likewise, the resume can be customized but it probably needs to be manual as well so that it is highly relevant to the job role. The best I can ask the script to do is move an extra resume copy into each subfolder so that I can make the changes myself. 
+
+Features to add:
+- be able to code in tags such as 'b' or 'd' for each job and pull different cover letters 
+or different resumes for different job classifications (still autofilling as appropriate)
