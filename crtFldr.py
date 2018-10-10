@@ -19,30 +19,34 @@ client = gspread.authorize(creds)
 month_mapping = {1:'January', 2:'February', 3:'March', 4:'April', 5:'May', 
                  6:'June', 7:'July', 8:'August', 9:'September', 10:'October', 
                  11:'November', 12:'December'}
+letters = {'b':'', 'd':'', 's':''} #contains letter types and will contain letters
+
 sheet = client.open("Job apps")
 date = input("Enter the date: ")
 data = sheet.worksheet(date)
 name_list = data.col_values(1, value_render_option='FORMATTED_VALUE')
+type_list = data.col_values(3, value_render_option='FORMATTED_VALUE')
 
 src = "C:/Users/joshu/OneDrive/Documents/2018/Documents/Reformatted Resume"
-src_name = 'Juei-Sheng Joshua Chiu Resume.docx'
+src_name = 'Chiu Resume.docx'
 source = os.path.join(src, src_name)
 
 src2 = "C:/Users/joshu/OneDrive/Documents/2018/Documents"
-src2_name = 'Juei-Sheng Joshua Chiu Cover Letter.docx'
+src2_name = 'Chiu Cover Letter.docx'
 source2 = os.path.join(src2, src2_name)
 
-src2_txt_name = 'Juei-Sheng Joshua Chiu Cover Letter.txt' #raw text of cover letter
-source_txt2 = os.path.join(src2, src2_txt_name)
-cover_letter_file = open(source_txt2)
-cover_letter_txt = cover_letter_file.read()
-cover_letter_file.close()
+for x in letters:
+    filename = "CL-" + x + ".txt"
+    tempfile = open(os.path.join(src2, filename))
+    letters[x] = tempfile.read()
+    tempfile.close()
 
-os.chdir('..')#script is in /Documents subfolder for neatness
+
+os.chdir('C:/Users/joshu/OneDrive/Documents/2018') #script is in github in joshu
 temp_dir = None #just the company and position name
 dst = None #final complete destination path
 
-def crtFldr(list):
+def crtFldr(n_list, t_list):
     '''
     this function creates the appropriate Date folder, populated with 
     appropriate subfolders named in 'Company - Position' format
@@ -71,9 +75,10 @@ def crtFldr(list):
             exit()
         pass
     os.chdir(date)
-    for i in list:
+    count = 0
+    for i in n_list:
         temp_dir = i.strip() #remove spaces from end/beginning of string
-    
+        l_type = t_list[count] #letter type (single char code) 
         try:
             os.makedirs(temp_dir)
         except FileExistsError:
@@ -82,38 +87,55 @@ def crtFldr(list):
         dst = os.path.join(os.getcwd(),temp_dir)
         shutil.copy(source, dst)
         shutil.copy(source2, dst)
-        autofillCoverLetter(dst, temp_dir, date)
-       
-def autofillCoverLetter(folder, company_and_position, mdy):
+        autofillCoverLetter(dst, temp_dir, date, l_type)
+        count += 1
+def autofillCoverLetter(folder, company_and_position, mdy, clt):
     '''
     This function takes the raw cover letter text and replaces 
     placeholder strings with appropriate & unique strings, and then opens, 
     writes to and saves the coverletter docx in the appropriate subfolder
     '''
-    file_name = os.path.join(folder, src2_name)
+    os.chdir(company_and_position)
     company_and_position = re.split('-', company_and_position)
     company = company_and_position[0].strip()#remove extra space
     position = company_and_position[1].strip()#remove extra space
+    resume_name = 'Chiu Resume - '+position+' .docx'
+    cover_name = 'Chiu Cover Letter - '+position+' .docx'
+    os.rename(src_name, resume_name) #rename resume with position
+    os.rename(src2_name, cover_name) # rename cover letter with position
+   
+    
+   
     
     mdy = re.split('-',mdy)
     mdy[0] = month_mapping[int(mdy[0])]
     mdy[2] = '20' + str(mdy[2])
     
-    tcl = cover_letter_txt
+    if not clt in letters:
+        print("Unknown cover letter type. Defaulting to 'd' type for " + position 
+              + " at " + company + ".")
+        clt = 'd'
+    
+    tcl = letters[clt]#copy the letter text for editing
     tcl = re.sub('_month',mdy[0],tcl)
     tcl =  re.sub('_date',mdy[1],tcl)
     tcl = re.sub('_year',mdy[2],tcl)
-    tcl = re.sub('position_name', position, tcl)
+    
+    if position[0].lower() in ('a', 'e', 'i', 'o', 'u'):
+        print("Changing article a to an for position name " + position)
+        tcl = re.sub('a position_name', ('an ' + position), tcl)
+    else:
+        tcl = re.sub('position_name', position, tcl)
     tcl = re.sub('company_name', company, tcl)
     
-    document = Document(file_name)
-    
+    document = Document(cover_name)
     #I like this font/size, plus I can always change it 
     style = document.styles['Normal']
     font = style.font
     font.name = 'Garamond'
     font.size = Pt(11)
     document.add_paragraph(tcl)
-    document.save(file_name)
-crtFldr(name_list)
+    document.save(cover_name)
+    os.chdir('..')
+crtFldr(name_list, type_list)
 input('Finished, press enter to exit:')
