@@ -18,3 +18,9 @@ or different resumes for different job classifications (still autofilling as app
 
 To add:
 - GUI
+
+Reminder on GitHub usage:
+- cd to ~/file-document-generator
+- git commit -a -m "Message here"
+- git checkout v#
+- git push 
