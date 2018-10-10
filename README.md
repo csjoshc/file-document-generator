@@ -1,6 +1,6 @@
-# file-document-generator (sample in wiki)
 
-v1 (Original Version) Finalized 10/10/18
+Version 2
+# file-document-generator (sample in wiki)
 Pulls  google sheets data through google Drive API, makes folders based on column of names, moves appropriate files
 
 there is also a 'client_secret.json' in the same directory, but I can't upload that since it gives access to my Google drive
@@ -15,11 +15,14 @@ Once I had this set up, it naturally followed that I could generate the folders,
 To be implemented features
 - be able to code in tags such as 'b' or 'd' for each job and pull different cover letters 
 or different resumes for different job classifications (still autofilling as appropriate)
+
 To add:
 - GUI
 
 Reminder on GitHub usage:
 * must create new branch on github before trying to push to it from bash*
+* make sure this has no missing files compared to the clone from master or else files will dissapear*
+- git fetch
 - cd to ~/file-document-generator
 - git commit -a -m "Message here"
 - git checkout v#
