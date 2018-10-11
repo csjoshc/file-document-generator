@@ -126,6 +126,7 @@ def autoClRe(folder, company_and_position, mdy, clt):
     if position[0].lower() in ('a', 'e', 'i', 'o', 'u'):
         print("Changing article a to an for position name " + position)
         tcl = re.sub('a position_name', ('an ' + position), tcl)
+        tcl = re.sub('position_name', position, tcl) #the position_name not subbed by above
     else:
         tcl = re.sub('position_name', position, tcl)
     tcl = re.sub('company_name', company, tcl)
