@@ -1,17 +1,20 @@
 
-Version 2 - 10-10-18
+Version 3 - 10-11-18
 # file-document-generator (sample in wiki)
 Pulls  google sheets data through google Drive API, makes folders based on column of names, moves appropriate files
 
 Newly Implemented features
-- be able to code in tags such as 'b' or 'd' for each job and pull different cover letters 
-- change article 'a' to 'an' for jobs beginning with vowels
-- rename cover letter and resume to include position name
+- more resume and cover letter types (+2)
+- pull different resumes for different job classifications, rename them appropriately
 
 To add:
-- pull different resumes for different job classifications
-- GUI
-- more resume and cover letter types 
+- GUI (may not add for a while)
+- more types as needed
+- add pdf copying (of transcript) using the same name interation (Chiu Transcript position_name) 
+- add in a toggle on cmd: 1. run file generator 2. delete transcript pdfs 
+ (since each is 300kb after 30 apps it would accumulate 10mb in my OneDrive)
+- add this toggle after the date prompt
+
 
 Reminder on GitHub usage:
 * must create new branch on github before trying to push to it from bash*
