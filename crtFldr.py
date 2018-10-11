@@ -30,11 +30,9 @@ type_list = data.col_values(3, value_render_option='FORMATTED_VALUE')
 if len(name_list) != len(type_list):
     print("Name and types misaligned or missing. Quitting.")
     input('press enter to exit:')
-    sys.exit()
+    exit()
 src = "C:/Users/joshu/OneDrive/Documents/2018/Documents"
-
 src2_name = 'Chiu Cover Letter.docx' #empty cover letter with formatting
-
 source2 = os.path.join(src, src2_name)
 
 for x in letters: #reads and stores cover letters
@@ -52,7 +50,7 @@ def crtFldr(n_list, t_list):
     '''
     this function creates the appropriate Date folder, populated with 
     appropriate subfolders named in 'Company - Position' format
-    
+
     For each folder, a copy of resume and an empty cover letter docx with 
     formatting is moved into each subfolder as it is created
         
@@ -125,7 +123,6 @@ def autoClRe(folder, company_and_position, mdy, clt):
     
     tcl = letters[clt]#copy the letter text for editing
     tcl = re.sub('_month _date, _year', (mdy[0] + ' ' + mdy[1] + ', ' + mdy[2]), tcl)
-
     if position[0].lower() in ('a', 'e', 'i', 'o', 'u'):
         print("Changing article a to an for position name " + position)
         tcl = re.sub('a position_name', ('an ' + position), tcl)

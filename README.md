@@ -6,10 +6,11 @@ Pulls  google sheets data through google Drive API, makes folders based on colum
 Newly Implemented features
 - more resume and cover letter types (+2)
 - pull different resumes for different job classifications, rename them appropriately
+- streamlined date replacement
 
 To add:
 - GUI (may not add for a while)
-- more types as needed
+- more types as needed (r)
 - add pdf copying (of transcript) using the same name interation (Chiu Transcript position_name) 
 - add in a toggle on cmd: 1. run file generator 2. delete transcript pdfs 
  (since each is 300kb after 30 apps it would accumulate 10mb in my OneDrive)
@@ -19,8 +20,8 @@ To add:
 Reminder on GitHub usage:
 * must create new branch on github before trying to push to it from bash*
 * make sure this has no missing files compared to the clone from master or else files will dissapear*
+- cd to file-document-generator
 - git fetch
-- cd to ~/file-document-generator
 - git commit -a -m "Message here"
 - git checkout v#
 - git push 
