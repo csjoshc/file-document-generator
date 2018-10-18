@@ -31,7 +31,7 @@ Several Long-term features:
 - if the cover letter is broken into individual paragraphs or even sentences, we can iterate through combinations to generate a higher match rate (wrt/ job description), similar to fminsearch in matlab (but with a higher threshold)
 - this is an automatic feature for job.optimizeLetter() to be implemented in the far future. In the master program we can set a GUI so I can choose to do this for individual jobs
 - how would we implement this for resumes?
-
+<pre>
 Rough idea for user preferences updating script 
 Preferences.py
 - add default.txt with default name First Middle Last and greeting as "Dear", and default preference to use First, middle and last names, promptCreate = True
@@ -150,7 +150,7 @@ Jobject (self, company & job, [t_date, t_dir], text) in separate class file
 		Using self.type
 		Using self.Folder & master
 
-
+</pre>
 Other notes:
 
 Reminder on GitHub usage:
