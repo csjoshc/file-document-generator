@@ -1,6 +1,6 @@
 
 Version 3 - 10-11-18
-# file-document-generator (sample in wiki)
+# Batch file processing (sample in wiki)
 Pulls  google sheets data through google Drive API, makes folders based on column of names, moves appropriate files
 
 Newly Implemented features
